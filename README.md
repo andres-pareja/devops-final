@@ -54,3 +54,51 @@ Ejecuta Gitleaks, Semgrep, Syft, Trivy y Hadolint. Los reportes quedan en `repor
 ## Monitoreo
 El mismo script incluye una función que verifica el estado de la API y los contenedores, y registra el resultado en `monitoreo.log`.
 
+
+## Comandos Linux utilizados
+
+```bash
+# Conexión al servidor
+ssh estudiante20@178.128.14.98
+
+# Navegación y creación de carpetas
+cd ~/devops-final
+
+# Copiar archivo de variables de entorno
+cp .env.example .env
+
+# Editar archivos
+nano .env
+nano docker-compose.yml
+nano seguridad.sh
+nano README.md
+
+# Dar permisos de ejecución al script
+chmod +x seguridad.sh
+
+# Despliegue con Docker
+docker compose up -d --build
+docker compose ps
+docker compose logs db
+
+# Verificar la API
+curl http://localhost:8020/health
+
+# Ejecutar pipeline de seguridad
+./seguridad.sh
+
+# Ver reportes generados
+ls -lh reportes/
+cat monitoreo.log
+
+# Git
+git config user.name "Andres Pareja"
+git config user.email "andres.pareja@aacesoft.com"
+git add docker-compose.yml seguridad.sh README.md
+git commit -m "Agrega docker-compose, script de seguridad y README"
+git add -f reportes/
+git commit -m "Agrega reportes de seguridad DevSecOps"
+git push origin main
+git log --oneline --graph
+```
+
